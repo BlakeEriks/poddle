@@ -11,21 +11,18 @@ const useUserActions = () => {
     const API_BASE_URL = process.env.REACT_APP_API_URL
     
     const login = ({ username, password }) => {
-        return http.post(`${API_BASE_URL}/authenticate`, {username, password})
+        return http.post(`${API_BASE_URL}/login`, {username, password})
             .then( data => {
                 localStorage.setItem('auth', JSON.stringify(data));
                 setAuth(data)
-                setViewState('chart')
             })
     }
 
     const register = ({ username, password }) => {
-        return http.post(`${API_BASE_URL}/register`, { username, password })
+        return http.post(`${API_BASE_URL}/users`, { username, password })
             .then( data => {
                 localStorage.setItem('auth', JSON.stringify(data));
                 setAuth(data)
-                setViewState('chart')
-                queryClient.invalidateQueries('portfolio')
             })
     }
 
