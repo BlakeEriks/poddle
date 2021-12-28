@@ -1,10 +1,12 @@
 import {useState} from "react"
+import { useNavigate } from "react-router";
 import useUserActions from '../hooks/user';
 
 const Login = ({ newUser }) => {
 
     const userActions = useUserActions()
     const [form, setForm] = useState({username: '', password: ''})
+    const navigate = useNavigate();
 
     const handleSubmit = async event => {
         event.preventDefault()
@@ -15,6 +17,7 @@ const Login = ({ newUser }) => {
             else {
                 await userActions.login({...form})
             }
+            navigate('/explore')
         }
         catch (err) {
             alert('Invalid login or username taken')

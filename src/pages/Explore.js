@@ -4,7 +4,7 @@ import usePodcasts from "../hooks/podcast"
 
 const Explore = () => {
 
-    const { getTopPodcasts, getSearchPodcasts } = usePodcasts()
+    const { getTopPodcasts, getSearchPodcasts, addPodcast } = usePodcasts()
     const [podcasts, setPodcasts] = useState([])
 
     const [searchString, setSearchString] = useState('')
@@ -20,16 +20,39 @@ const Explore = () => {
     }
 
     return (
-        <div className="w-full flex flex-wrap flex-col items-center">
-            <form onSubmit={onSubmit}>
-                <input
-                    placeholder="Search" 
-                    value={searchString}
-                    onChange={event => setSearchString(event.target.value)}
+        <>
+            <div className="relative bg-gradient-to-r bg-pink-300 pb-10 overflow-hidden">
+                <img
+                    src="https://wallpaperaccess.com/full/4061949.jpg"
+                    className="filter  hue-rotate-90 saturate-50 bg-contain bg-center opacity-100"
                 />
-            </form>
-            <Podcasts podcasts={podcasts}/>
-        </div>
+                <div style={{background: 'rgb(244,114,182)',
+background: 'linear-gradient(0deg, rgba(249, 168, 212,1) 0%, rgba(241,241,241,0.5) 50%, rgba(249, 168, 212,1) 100%)'
+}} className="absolute top-0">
+                    <img
+                        src="https://wallpaperaccess.com/full/4061949.jpg"
+                        className="opacity-0"
+                    />
+                </div>
+                <div className="absolute top-1/4 left-40 text-5xl font-light w-96 text-center text-gray-600 leading-snug">
+                    Find your next <span className="text-purple-600 font-bold">favorite podcast</span> today!
+                </div>
+            </div>
+            <div className="text-center text-6xl font-head my-8">
+                Explore Podcasts
+            </div>
+            <div className="w-full flex flex-wrap flex-col items-center">
+                <form onSubmit={onSubmit}>
+                    <input
+                        className="p-4 text-3xl br border border-black"
+                        placeholder="Search" 
+                        value={searchString}
+                        onChange={event => setSearchString(event.target.value)}
+                    />
+                </form>
+                <Podcasts podcasts={podcasts} action={addPodcast}/>
+            </div>
+        </>
     )
 }
 

@@ -1,4 +1,20 @@
-const Podcasts = ({podcasts}) => {
+import usePodcasts from "../hooks/podcast"
+import { Heart, Heartbeat } from '@styled-icons/fa-solid'
+import { useState, useEffect } from "react"
+import { useAuthState } from '../hooks/auth';
+
+const Podcasts = ({podcasts, action}) => {
+
+    const { getMyPodcasts } = usePodcasts()
+    const [myPodcasts, setMyPodcasts] = useState()
+    const [auth] = useAuthState() 
+
+    useEffect( async () => {
+        setMyPodcasts(await getMyPodcasts())
+    },[])
+
+    const inMyPodcasts = podcast => myPodcasts?.some( myPodcast => myPodcast.api_id === podcast.id)
+
     return (
         <div className="w-full flex flex-wrap flex-row justify-evenly">
             {podcasts?.map( podcast => {
@@ -10,12 +26,18 @@ const Podcasts = ({podcasts}) => {
                 title = title?.length > 30 ? title?.substring(0,30) + '...' : title
 
                 return (
-                    <div key={podcast.id} className="m-8 flex flex-col overflow-hidden cursor-pointer br group duration-500 transform hover:scale-110">
-                        <div className="w-full flex justify-center p-2 bg-gradient-to-b from-pink-200 to-pink-400">
+                    <div key={podcast.id} className="m-8 flex flex-col overflow-hidden br group duration-500 transform hover:scale-110">
+                        <div className="w-full flex justify-center p-2 bg-gradient-to-b from-pink-100 to-pink-300">
                             {title}
                         </div>
-                        <div className={"relative w-80 h-72 flex justify-end podcast-container overflow-hidden bg-center bg-cover"} style={ {backgroundImage: bgImage}}>
-                            <div className="opacity-0 text-center pt-14 bg-gradient-to-t from-pink-400 group-hover:opacity-100 duration-300 transition z-10">
+                        <div className={"relative w-80 h-72 flex justify-between items-center podcast-container overflow-hidden bg-center bg-cover"} style={ {backgroundImage: bgImage}}>
+                            {action.name === 'addPodcast' &&
+                            <Heart 
+                                className={"relative top-16 cursor-pointer h-24 w-24 opacity-0 group-hover:opacity-60 hover:text-pink-200 text-gray-300 " + (inMyPodcasts(podcast) ? " text-pink-500 hover:text-pink-500 group-hover:opacity-90" : "")}
+                                onClick={() => action(podcast)}
+                            />
+                            }
+                            <div className="opacity-0 text-center text-bg group-hover:opacity-100 duration-300 transition z-10">
                                 {description}
                             </div>
                         </div>
