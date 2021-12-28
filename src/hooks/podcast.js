@@ -1,31 +1,45 @@
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import useHttp from "./http";
+import { useAuthState } from './auth';
  
 const API_BASE_URL = process.env.REACT_APP_API_URL
 
 const usePodcasts = () => {
+
     const http = useHttp()
+    const [auth] = useAuthState()
+    const queryClient = useQueryClient()
 
     const getTopPodcasts = async () => (await http.get(`${API_BASE_URL}/podcasts/top`)).podcasts
 
     const getSearchPodcasts = async query => (await http.get(`${API_BASE_URL}/podcasts/search?query=${query}`)).results
 
-    const getMyPodcasts = async () => await http.get(`${API_BASE_URL}/podcasts/my_list`)
+    const myPodcastsQuery = useQuery('podcasts/my-list', async () => await http.get(`${API_BASE_URL}/podcasts/my_list`), {enabled: !!auth} )
 
-    const addPodcast = async podcast => await http.post(`${API_BASE_URL}/podcasts`, podcast)
+    const addPodcast = async podcast => {
+        if (!auth) {
+            alert('Please log in to save podcasts.')
+        }
+        else {
+            console.log('adding podcast...')
+            await http.post(`${API_BASE_URL}/podcasts`, {...podcast, api_id: podcast.id})
+            console.log('invalidating my list...')
+            queryClient.invalidateQueries('podcasts/my-list')
+        }
+    }
 
-    return {getTopPodcasts, getSearchPodcasts, getMyPodcasts, addPodcast}
+    const removePodcast = async podcast => {
+        await http.delete(`${API_BASE_URL}/podcasts/my_list/${podcast.id}`)
+        queryClient.invalidateQueries('podcasts/my-list')
+    }
+
+    return {
+        getTopPodcasts, 
+        getSearchPodcasts, 
+        myPodcasts: myPodcastsQuery?.data, 
+        addPodcast, 
+        removePodcast
+    }
 }
-
-// const useAddPodcast = () => {
-
-//         const http = useHttp()
-//         const addPodcastMutation = useMutation( 
-//             podcast => http.post(`${API_BASE_URL}/podcasts`, podcast), 
-//             {onSuccess: () => queryClient.invalidateQueries(`podcasts/my_list`)}
-//         )
-
-//         return podcast => addPodcastMutation.mutate(podcast)
-// }
 
 export default usePodcasts
