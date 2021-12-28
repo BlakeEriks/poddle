@@ -1,17 +1,10 @@
 import usePodcasts from "../hooks/podcast"
-import { Heart, Heartbeat } from '@styled-icons/fa-solid'
+import { Heart, Times } from '@styled-icons/fa-solid'
 import { useState, useEffect } from "react"
-import { useAuthState } from '../hooks/auth';
 
 const Podcasts = ({podcasts, action}) => {
 
-    const { getMyPodcasts } = usePodcasts()
-    const [myPodcasts, setMyPodcasts] = useState()
-    const [auth] = useAuthState() 
-
-    useEffect( async () => {
-        setMyPodcasts(await getMyPodcasts())
-    },[])
+    const { myPodcasts } = usePodcasts()
 
     const inMyPodcasts = podcast => myPodcasts?.some( myPodcast => myPodcast.api_id === podcast.id)
 
@@ -33,6 +26,12 @@ const Podcasts = ({podcasts, action}) => {
                         <div className={"relative w-80 h-72 flex justify-between items-center podcast-container overflow-hidden bg-center bg-cover"} style={ {backgroundImage: bgImage}}>
                             {action.name === 'addPodcast' &&
                             <Heart 
+                                className={"relative top-16 cursor-pointer h-24 w-24 opacity-0 group-hover:opacity-60 hover:text-pink-200 text-gray-300 " + (inMyPodcasts(podcast) ? " text-pink-500 hover:text-pink-500 group-hover:opacity-90" : "")}
+                                onClick={() => action(podcast)}
+                            />
+                            }
+                            {action.name === 'removePodcast' &&
+                            <Times 
                                 className={"relative top-16 cursor-pointer h-24 w-24 opacity-0 group-hover:opacity-60 hover:text-pink-200 text-gray-300 " + (inMyPodcasts(podcast) ? " text-pink-500 hover:text-pink-500 group-hover:opacity-90" : "")}
                                 onClick={() => action(podcast)}
                             />
