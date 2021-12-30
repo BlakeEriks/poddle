@@ -15,15 +15,16 @@ function App() {
 
   return (
     <>
-    <Header />
-    <Routes>
-      <Route index element={<Home />} />
-      <Route path="login" element={<Login />} />
-      <Route path="sign-up" element={<Login newUser={true}/>} />
-      <Route path="explore" element={<Explore />} />
-      <Route path="my-list" element={auth ? <MyList /> : <Navigate to="/login"/>} />
-    </Routes>
-    <Footer />
+      <Header />
+      <Routes>
+        <Route index element={<Navigate to="home" />} />
+        <Route path="home" element={<Home />} />
+        <Route path="login" element={<Login />} />
+        <Route path="sign-up" element={<Login newUser={true}/>} />
+        <Route path="explore" element={<Explore />} />
+        <Route path="my-list" element={auth ? <MyList /> : <Navigate to="/login"/>} />
+      </Routes>
+      <Footer />
     </>
   );
 }
