@@ -30,9 +30,9 @@ const Header = () => {
                     <span className="p-2">
                         {auth.user.username}
                     </span>
-                    <span onClick={logout} className="bg-white p-2 br">
+                    <Link to="home" onClick={logout} className="bg-white p-2 br">
                         Logout
-                    </span>
+                    </Link>
                 </>
                 :
                 <>
