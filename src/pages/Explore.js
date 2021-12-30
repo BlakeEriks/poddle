@@ -24,15 +24,11 @@ const Explore = () => {
             <div className="relative bg-gradient-to-r bg-pink-300 pb-10 overflow-hidden">
                 <img
                     src="https://wallpaperaccess.com/full/4061949.jpg"
-                    className="filter  hue-rotate-90 saturate-50 bg-contain bg-center opacity-100"
+                    className="filter saturate-50 bg-contain bg-center opacity-100"
                 />
                 <div style={{background: 'rgb(244,114,182)',
 background: 'linear-gradient(0deg, rgba(249, 168, 212,1) 0%, rgba(241,241,241,0.5) 50%, rgba(249, 168, 212,1) 100%)'
-}} className="absolute top-0">
-                    <img
-                        src="https://wallpaperaccess.com/full/4061949.jpg"
-                        className="opacity-0"
-                    />
+}} className="absolute top-0 h-full w-full">
                 </div>
                 <div className="absolute top-1/4 left-40 text-5xl font-light w-96 text-center text-gray-600 leading-snug">
                     Find your next <span className="text-purple-600 font-bold">favorite podcast</span> today!
