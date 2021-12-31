@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import useHttp from "./http";
 import { useAuthState } from './auth';
  
@@ -42,4 +42,10 @@ const usePodcasts = () => {
     }
 }
 
-export default usePodcasts
+const usePodcast = id => {
+    const http = useHttp()
+    const {data, isSuccess} = useQuery(`podcasts/${id}`, async () => await http.get(`${API_BASE_URL}/podcasts/${id}`), {enabled: !!id} )
+    return {podcast: data, isSuccess}
+}
+
+export {usePodcasts, usePodcast}
