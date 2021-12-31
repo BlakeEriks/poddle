@@ -8,6 +8,7 @@ import MyList from './pages/MyList';
 import Home from './pages/Home';
 import { useAuthState } from './hooks/auth';
 import Login from './pages/Login';
+import Podcast from './pages/Podcast';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="home" element={<Home />} />
         <Route path="login" element={<Login />} />
         <Route path="sign-up" element={<Login newUser={true}/>} />
+        <Route path="podcasts/:id" element={<Podcast />} />
         <Route path="explore" element={<Explore />} />
         <Route path="my-list" element={auth ? <MyList /> : <Navigate to="/login"/>} />
       </Routes>
