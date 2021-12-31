@@ -1,7 +1,5 @@
-import { ConsoleWriter } from 'istanbul-lib-report';
-import { useState, useEffect } from 'react';
 import Podcasts from '../components/Podcasts';
-import usePodcasts from '../hooks/podcast';
+import {usePodcasts} from '../hooks/podcast';
 
 const MyList = () => {
 
