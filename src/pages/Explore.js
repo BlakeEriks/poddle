@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import Podcasts from "../components/Podcasts"
-import usePodcasts from "../hooks/podcast"
+import {usePodcasts} from "../hooks/podcast"
 
 const Explore = () => {
 
@@ -9,8 +9,11 @@ const Explore = () => {
 
     const [searchString, setSearchString] = useState('')
 
-    useEffect( async () => {
-        setPodcasts(await getTopPodcasts())
+    useEffect( () => {
+        const updatePodcasts = async () => {
+            setPodcasts(await getTopPodcasts())
+        }
+        updatePodcasts()
     }, [])
 
     const onSubmit = async event => {
