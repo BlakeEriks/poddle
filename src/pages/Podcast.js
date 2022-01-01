@@ -1,13 +1,15 @@
 import { useParams } from "react-router";
-import { usePodcast } from "../hooks/podcast";
+import { usePodcast, usePodcasts } from "../hooks/podcast";
 import moment from 'moment'
-import { ExternalLinkAlt, Heart } from "@styled-icons/fa-solid" 
+import { ExternalLinkAlt, Heart, Times } from "@styled-icons/fa-solid" 
 
 const Podcast = () => {
 
     const { id } = useParams()
     const { podcast } = usePodcast(id)
-    console.log(podcast)
+    const { addPodcast, removePodcast, myPodcasts } = usePodcasts()
+
+    const inMyPodcasts = myPodcasts.some(podcast => podcast.api_id === id)
 
     const formatDuration = duration => {
         let hours = Math.floor(duration/3600)
@@ -24,7 +26,7 @@ const Podcast = () => {
 
     return (
         <div className="flex flex-col w-2/3 mx-auto items-start bg-pink-300 bg-opacity-50 m-6 p-6 br">
-            <div className="flex flex-row pb-6 border-b-2 border-gray-600">
+            <div className="flex flex-row pb-6 border-b-2 border-gray-600 w-full">
                 <div className="br overflow-hidden h-36 w-36 flex items-center">
                     <img src={podcast?.image}/>
                 </div>
@@ -89,10 +91,19 @@ const Podcast = () => {
                 </ul>
             </div>
             <div className="flex justify-center w-full">
-                <span className="text-2xl font-medium flex items-center cursor-pointer group p-4 br hover:bg-white">
-                    <Heart className="h-7 pr-4 text-gray-600 opacity-40"/>
-                    Add To My List
-                </span>
+                <div className="text-2xl font-medium flex items-center cursor-pointer group p-4 br hover:bg-white">
+                    {inMyPodcasts ?
+                    <div onClick={() => removePodcast(podcast)}>
+                        <Times className="h-7 pr-4 text-gray-600 opacity-40"/>
+                        Remove From My List
+                    </div>
+                    :
+                    <div onClick={() => addPodcast(podcast)}>
+                        <Heart className="h-7 pr-4 text-gray-600 opacity-40"/>
+                        Add To My List
+                    </div>
+                    }
+                </div>
             </div>
         </div>
     )
