@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react"
 import Podcasts from "../components/Podcasts"
 import {usePodcasts} from "../hooks/podcast"
+import guyImg from '../img/guy1.png'
 
-const Explore = () => {
+const Top = () => {
 
     const { getTopPodcasts, getSearchPodcasts, addPodcast } = usePodcasts()
     const [podcasts, setPodcasts] = useState([])
-
     const [searchString, setSearchString] = useState('')
 
     useEffect( () => {
@@ -24,21 +24,16 @@ const Explore = () => {
 
     return (
         <>
-            <div className="relative bg-gradient-to-r bg-pink-300 pb-10 overflow-hidden">
-                <img
-                    src="https://wallpaperaccess.com/full/4061949.jpg"
-                    className="filter saturate-50 bg-contain bg-center opacity-100"
-                />
-                <div style={{background: 'rgb(244,114,182)',
-background: 'linear-gradient(0deg, rgba(249, 168, 212,1) 0%, rgba(241,241,241,0.5) 50%, rgba(249, 168, 212,1) 100%)'
-}} className="absolute top-0 h-full w-full">
+            <div className="flex flex-row items-center justify-center py-10 overflow-hidden border-b border-gray-300">
+                <div className="w-96 p-10">
+                    <img src={guyImg} alt="guy listening" />
                 </div>
-                <div className="absolute top-1/4 left-40 text-5xl font-light w-96 text-center text-gray-600 leading-snug">
-                    Find your next <span className="text-purple-600 font-bold">favorite podcast</span> today!
+                <div className="text-4xl font-light text-center leading-snug w-96">
+                    Don't miss a beat with the <span className="bg-green font-semibold">top podcasts</span> from all around the world.
                 </div>
             </div>
-            <div className="text-center text-6xl font-head my-8">
-                Explore Podcasts
+            <div className="text-center text-4xl font-head my-8">
+                Top Podcasts
             </div>
             <div className="w-full flex flex-wrap flex-col items-center">
                 <form onSubmit={onSubmit}>
@@ -55,4 +50,4 @@ background: 'linear-gradient(0deg, rgba(249, 168, 212,1) 0%, rgba(241,241,241,0.
     )
 }
 
-export default Explore
+export default Top
