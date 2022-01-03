@@ -5,10 +5,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f6e5f7;
-  background-image:  radial-gradient(#f472b6 0.5px, transparent 0.5px), radial-gradient(#f472b6 0.5px, #f7e5f7 0.5px);
-  background-size: 20px 20px;
-  background-position: 0 0,10px 10px;
 }
 
 code {
@@ -31,9 +27,6 @@ input:focus {
   }
   .br {
     border-radius: 25px;
-  }
-  .text-bg {
-    background: linear-gradient(rgba(249, 168, 212, 0.7), rgba(249, 168, 212, 0.9));
   }
 }
 
