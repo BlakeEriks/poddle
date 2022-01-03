@@ -9,18 +9,21 @@ const Header = () => {
     const { logout } = useUserActions()
 
     return (
-        <div className="flex flex-row justify-between items-center p-6 bg-pink-300 font-script text-2xl font-semibold">
-            <Link to="home" className="w-1/6 cursor-pointer">
-                <img src={logo} className="" />
+        <div className="flex flex-row justify-between items-center px-6 font-script text-2xl border-b border-gray-300">
+            <Link to="home" className="w-32 cursor-pointer font-semibold" >
+                <img src={logo} />
             </Link>
-            <div className="">
-                <Link to="home" className="px-10 py-5 hover:bg-pink-200">
+            <div className="flex flex-row justify-center w-full">
+                <Link to="home" className="hover:bg-green p-5">
                     Home
                 </Link>
-                <Link to="explore" className="px-10 py-5 hover:bg-pink-200">
-                    Explore
+                <Link to="top" className="hover:bg-green p-5">
+                    Top
                 </Link>
-                <Link to="my-list" className="px-10 py-5 hover:bg-pink-200">
+                <Link to="recommended" className="hover:bg-green p-5">
+                    Recommended
+                </Link>
+                <Link to="my-list" className="hover:bg-green p-5">
                     My List
                 </Link>
             </div>
@@ -30,7 +33,7 @@ const Header = () => {
                     <span className="p-2">
                         {auth.user.username}
                     </span>
-                    <Link to="home" onClick={logout} className="bg-white p-2 br">
+                    <Link to="home" onClick={logout} className="bg-green p-2 br">
                         Logout
                     </Link>
                 </>
@@ -39,7 +42,7 @@ const Header = () => {
                     <Link to="login" className="p-2">
                         Log In
                     </Link> {" "}
-                    <Link to="sign-up" className="bg-white p-2 br">
+                    <Link to="sign-up" className="bg-green p-2 br">
                         Sign Up
                     </Link>
                 </>
