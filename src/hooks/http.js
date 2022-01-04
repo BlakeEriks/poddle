@@ -12,7 +12,7 @@ const useHttp = () => {
                     'Content-Type': 'application/json',
                     'Authorization': 'bearer ' + auth?.token
                 }
-            };
+            }
             if (body) {
                 requestOptions.body = JSON.stringify(body)
             }
