@@ -21,9 +21,7 @@ const usePodcasts = () => {
             alert('Please log in to save podcasts.')
         }
         else {
-            console.log('adding podcast...')
-            await http.post(`${API_BASE_URL}/podcasts`, {...podcast, api_id: podcast.id})
-            console.log('invalidating my list...')
+            await http.post(`${API_BASE_URL}/podcasts/my_list`, {...podcast, api_id: podcast.id})
             queryClient.invalidateQueries('podcasts/my-list')
         }
     }
@@ -44,6 +42,7 @@ const usePodcasts = () => {
 
 const usePodcast = id => {
     const http = useHttp()
+    console.log('getting : ' + `${API_BASE_URL}/podcasts/${id}`)
     const {data, isSuccess} = useQuery(`podcasts/${id}`, async () => await http.get(`${API_BASE_URL}/podcasts/${id}`), {enabled: !!id} )
     return {podcast: data, isSuccess}
 }

@@ -1,7 +1,7 @@
 import { useParams } from "react-router";
 import { usePodcast, usePodcasts } from "../hooks/podcast";
 import moment from 'moment'
-import { ExternalLinkAlt, Heart, Times } from "@styled-icons/fa-solid" 
+import { Heart, Times } from "@styled-icons/fa-solid" 
 
 const Podcast = () => {
 
@@ -9,8 +9,10 @@ const Podcast = () => {
     const { podcast } = usePodcast(id)
     const { addPodcast, removePodcast, myPodcasts } = usePodcasts()
 
-    const inMyPodcasts = myPodcasts.some(podcast => podcast.api_id === id)
-
+    const inMyPodcasts = () => {
+        return myPodcasts?.some(podcast => podcast.api_id === id)
+    }
+    
     const formatDuration = duration => {
         let hours = Math.floor(duration/3600)
         if (hours < 10) hours = '0' + hours
@@ -25,8 +27,8 @@ const Podcast = () => {
     }
 
     return (
-        <div className="flex flex-col w-2/3 mx-auto items-start bg-pink-300 bg-opacity-50 m-6 p-6 br">
-            <div className="flex flex-row pb-6 border-b-2 border-gray-600 w-full">
+        <div className="flex flex-col w-2/3 mx-auto items-start bg-opacity-50 m-6 p-6 br">
+            <div className="flex flex-row pb-6 border-b-2 border-gray-300 w-full">
                 <div className="br overflow-hidden h-36 w-36 flex items-center">
                     <img src={podcast?.image}/>
                 </div>
@@ -54,7 +56,7 @@ const Podcast = () => {
                 <div>
                     {podcast?.episodes.map(episode => {
                         return (
-                            <a href={episode.link} target="blank" key={episode.id} className="flex flex-row items-center my-2 hover:bg-pink-300">
+                            <a href={episode.link} target="blank" key={episode.id} className="flex flex-row items-center my-2 hover:bg-green">
                                 <img className="h-16 rounded-3xl px-2" src={episode.image} alt="episode" />
                                 <div className="px-2 border-l-2 border-gray-600">
                                     <div className="text-lg leading-none">
@@ -91,8 +93,8 @@ const Podcast = () => {
                 </ul>
             </div>
             <div className="flex justify-center w-full">
-                <div className="text-2xl font-medium flex items-center cursor-pointer group p-4 br hover:bg-white">
-                    {inMyPodcasts ?
+                <div className="text-2xl font-medium flex items-center cursor-pointer group p-4 br hover:bg-green">
+                    {inMyPodcasts() ?
                     <div onClick={() => removePodcast(podcast)}>
                         <Times className="h-7 pr-4 text-gray-600 opacity-40"/>
                         Remove From My List
