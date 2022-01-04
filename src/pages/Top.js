@@ -5,26 +5,18 @@ import guyImg from '../img/guy1.png'
 
 const Top = () => {
 
-    const { getTopPodcasts, getSearchPodcasts, addPodcast } = usePodcasts()
-    const [podcasts, setPodcasts] = useState([])
-    const [searchString, setSearchString] = useState('')
+    const { topPodcasts } = usePodcasts()
+    // const [searchString, setSearchString] = useState('')
 
-    useEffect( () => {
-        const updatePodcasts = async () => {
-            setPodcasts(await getTopPodcasts())
-        }
-        updatePodcasts()
-    }, [])
-
-    const onSubmit = async event => {
-        event.preventDefault()
-        if (!searchString.length) return
-        setPodcasts(await getSearchPodcasts(searchString))
-    }
+    // const onSubmit = async event => {
+    //     event.preventDefault()
+    //     if (!searchString.length) return
+    //     setPodcasts(await getSearchPodcasts(searchString))
+    // }
 
     return (
         <>
-            <div className="flex flex-row items-center justify-center py-10 overflow-hidden border-b border-gray-300">
+            <div className="flex flex-row items-center justify-center p-24 overflow-hidden border-b border-gray-300">
                 <div className="w-96 p-10">
                     <img src={guyImg} alt="guy listening" />
                 </div>
@@ -36,15 +28,15 @@ const Top = () => {
                 Top Podcasts
             </div>
             <div className="w-full flex flex-wrap flex-col items-center">
-                <form onSubmit={onSubmit}>
+                {/* <form onSubmit={onSubmit}>
                     <input
                         className="p-4 text-3xl br border border-black"
                         placeholder="Search" 
                         value={searchString}
                         onChange={event => setSearchString(event.target.value)}
                     />
-                </form>
-                <Podcasts podcasts={podcasts} action={addPodcast}/>
+                </form> */}
+                <Podcasts podcasts={topPodcasts} />
             </div>
         </>
     )

@@ -3,10 +3,10 @@ import girl1 from '../img/girl1.png'
 const Home = () => {
     return (
         <div className="flex flex-col">
-            <div className="flex items-center justify-evenly p-24">
+            <div className="flex items-center justify-evenly p-24 border-b border-gray-300">
                 <div className="text-center p-8">
-                    <div className="text-4xl leading-snug font-light justify-center items-center w-80">
-                        <span className="font-semibold">Poddle</span> is the #1 app for discovering 
+                    <div className="flex flex-col text-4xl leading-snug font-light items-center w-80">
+                        <div><span className="font-semibold">Poddle</span> is the #1 app for discovering </div>
                         <div className="bg-green font-medium">
                             your next podcast.
                         </div>
