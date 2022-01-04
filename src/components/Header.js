@@ -9,7 +9,7 @@ const Header = () => {
     const { logout } = useUserActions()
 
     return (
-        <div className="flex flex-row justify-between items-center px-6 font-script text-2xl border-b border-gray-300">
+        <div className="flex flex-row justify-between items-center px-6 font-script text-2xl border-b border-gray-300 w-full">
             <Link to="home" className="w-32 cursor-pointer font-semibold" >
                 <img src={logo} />
             </Link>
@@ -27,27 +27,27 @@ const Header = () => {
                     My List
                 </Link>
             </div>
-            <span className="text-lg font-normal">
+            <div className="text-lg font-normal">
                 { auth ? 
-                <>
-                    <span className="p-2">
-                        {auth.user.username}
-                    </span>
-                    <Link to="home" onClick={logout} className="bg-green p-2 br">
-                        Logout
-                    </Link>
-                </>
+                    <div className="flex flex-row">
+                        <span className="p-2">
+                            {auth.user.username}
+                        </span>
+                        <Link to="home" onClick={logout} className="bg-green p-2 br">
+                            Logout
+                        </Link>
+                    </div>
                 :
-                <>
-                    <Link to="login" className="p-2">
-                        Log In
-                    </Link> {" "}
-                    <Link to="sign-up" className="bg-green p-2 br">
-                        Sign Up
-                    </Link>
-                </>
+                    <div className="flex items-center">
+                        <Link to="login" className="p-2 whitespace-nowrap">
+                            Log In
+                        </Link> {" "}
+                        <Link to="sign-up" className="bg-green p-2 br whitespace-nowrap">
+                            Sign Up
+                        </Link>
+                    </div>
                 }
-            </span>
+            </div>
         </div>
     )
 }

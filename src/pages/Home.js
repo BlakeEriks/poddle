@@ -3,7 +3,7 @@ import girl1 from '../img/girl1.png'
 const Home = () => {
     return (
         <div className="flex flex-col">
-            <div className="flex flex-row items-center justify-center w-full">
+            <div className="flex items-center justify-evenly p-24">
                 <div className="text-center p-8">
                     <div className="text-4xl leading-snug font-light justify-center items-center w-80">
                         <span className="font-semibold">Poddle</span> is the #1 app for discovering 
@@ -12,9 +12,7 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-                <div className="p-12">
-                    <img src={girl1} alt="woman listening to podcast" className="w-80"/>
-                </div>
+                <img src={girl1} alt="woman listening to podcast" style={{width: '25vw'}}/>
             </div>
             <div className="flex flex-row justify-evenly items-center text-xl font-light my-10 leading-snug">
                 <div className="flex flex-col items-center w-3/12 box-shadow br p-4">
