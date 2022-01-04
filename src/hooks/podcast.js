@@ -10,7 +10,9 @@ const usePodcasts = () => {
     const [auth] = useAuthState()
     const queryClient = useQueryClient()
 
-    const getTopPodcasts = async () => (await http.get(`${API_BASE_URL}/podcasts/top`)).podcasts
+    const topPodcastsQuery = useQuery('podcasts/top', async () => await http.get(`${API_BASE_URL}/podcasts/top`))
+
+    const recommendedPodcastsQuery = useQuery('podcasts/recommended', async () => await http.get(`${API_BASE_URL}/podcasts/recommended`), {enabled: !!auth})
 
     const getSearchPodcasts = async query => (await http.get(`${API_BASE_URL}/podcasts/search?query=${query}`)).results
 
@@ -32,9 +34,10 @@ const usePodcasts = () => {
     }
 
     return {
-        getTopPodcasts, 
+        topPodcasts: topPodcastsQuery?.data?.podcasts, 
         getSearchPodcasts, 
-        myPodcasts: myPodcastsQuery?.data, 
+        myPodcasts: myPodcastsQuery?.data,
+        recommendedPodcasts: recommendedPodcastsQuery?.data, 
         addPodcast, 
         removePodcast
     }
