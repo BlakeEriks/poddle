@@ -21,7 +21,10 @@ const useGenres = () => {
     const genreMutation = useMutation( ids => {
         return http.put(`${API_BASE_URL}/genres/my_list`, ids)
     }, {
-        onSuccess: () => queryClient.invalidateQueries('genres/my-list')
+        onSuccess: () => {
+            queryClient.invalidateQueries('genres/my-list')
+            queryClient.invalidateQueries('podcasts/recommended')
+        }
     })
 
     return {
