@@ -1,11 +1,13 @@
 import useGenres from '../hooks/genre';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router';
 
 const Genres = () => {
 
     const {allGenres, myGenres, updateGenres} = useGenres()
     const [userGenres, setUserGenres] = useState([])
+    const navigate = useNavigate()
 
     useEffect( () => {
         setUserGenres(myGenres)
@@ -16,7 +18,12 @@ const Genres = () => {
             setUserGenres(userGenres.filter(userGenre => userGenre.id !== genre.id))
         }
         else {
-            setUserGenres([...userGenres, genre])
+            if (userGenres.length === 5) {
+                setUserGenres([...userGenres.slice(1), genre])
+            }
+            else {
+                setUserGenres([...userGenres, genre])
+            }
         }
     }
 
@@ -29,6 +36,14 @@ const Genres = () => {
             if (!userGenres?.some(genre => genre.id === userGenre.id)) changed = true
         })
         return changed
+    }
+
+    const onSave = event => {
+        event.preventDefault()
+        if (hasChanges()) {
+            updateGenres({ids: userGenres.map(genre => genre.id)})
+        }
+        navigate('/recommended')
     }
 
     return (
@@ -49,7 +64,13 @@ const Genres = () => {
                     )
                 })}
             </div>
-            <button onClick={() => updateGenres({ids: userGenres.map(genre => genre.id)})} className={"my-4 px-10 py-3 text-2xl br border border-gray-300 " + ( hasChanges() ? 'bg-green' : '' )}>Save</button>
+            <form onSubmit={onSave}>
+                <button 
+                    className={"my-4 px-10 py-3 text-2xl br border border-gray-300 " + ( hasChanges() ? 'bg-green' : '' )}
+                >
+                    Save
+                </button>
+            </form>
         </div>
     )
     
