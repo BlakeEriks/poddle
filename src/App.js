@@ -9,6 +9,7 @@ import { useAuthState } from './hooks/auth';
 import Login from './pages/Login';
 import Podcast from './pages/Podcast';
 import Top from './pages/Top';
+import Genres from './pages/Genres';
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
         <Route path="podcasts/:id" element={<Podcast />} />
         <Route path="top" element={<Top />} />
         <Route path="my-list" element={auth ? <MyList /> : <Navigate to="/login"/>} />
+        <Route path="my-genres" element={auth ? <Genres /> : <Navigate to="/login"/>} />
       </Routes>
       <Footer />
     </>
