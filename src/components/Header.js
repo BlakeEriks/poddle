@@ -30,9 +30,9 @@ const Header = () => {
             <div className="text-lg font-normal">
                 { auth ? 
                     <div className="flex flex-row">
-                        <span className="p-2">
+                        <Link to="my-genres" className="p-2">
                             {auth.user.username}
-                        </span>
+                        </Link>
                         <Link to="home" onClick={logout} className="bg-green p-2 br">
                             Logout
                         </Link>
