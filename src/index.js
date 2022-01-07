@@ -20,9 +20,7 @@ ReactDOM.render(
   <QueryClientProvider client={queryClient}>
     <RecoilRoot>
       <BrowserRouter>
-        <React.StrictMode>
-          <App />
-        </React.StrictMode>
+        <App />
       </BrowserRouter>
     </RecoilRoot>  
   </QueryClientProvider>,
