@@ -1,8 +1,6 @@
-import { useNavigate } from "react-router";
+import { Link } from "react-router-dom"
 
 const Podcasts = ({podcasts}) => {
-
-    const navigate = useNavigate()
 
     return (
         <div className="w-full flex flex-wrap flex-row justify-evenly">
@@ -16,7 +14,7 @@ const Podcasts = ({podcasts}) => {
                 title = title?.length > 24 ? title?.substring(0,24) + '...' : title
 
                 return (
-                    <div onClick={() => navigate(`/podcasts/${podcast.api_id}`)} key={podcast.id} className="m-8 flex flex-col overflow-hidden br group duration-500 transform hover:scale-110 cursor-pointer w-60 box-shadow">
+                    <Link to={`/podcasts/${podcast.api_id}`} key={podcast.id} className="m-8 flex flex-col overflow-hidden br group duration-500 transform hover:scale-110 cursor-pointer w-60 box-shadow">
                         <div className="w-full flex justify-center p-2 bg-green">
                             {title}
                         </div>
@@ -25,7 +23,7 @@ const Podcasts = ({podcasts}) => {
                                 {description}
                             </div>
                         </div>
-                    </div>
+                    </Link>
                 )
             })}
         </div>
