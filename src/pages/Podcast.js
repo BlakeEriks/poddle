@@ -1,13 +1,17 @@
 import { useParams } from "react-router";
-import { usePodcast, usePodcasts } from "../hooks/podcast";
+import usePodcasts from "../hooks/podcast";
 import moment from 'moment'
 import { Heart, Times } from "@styled-icons/fa-solid" 
+import { useEffect } from 'react';
 
 const Podcast = () => {
 
     const { id } = useParams()
-    const { podcast } = usePodcast(id)
-    const { addPodcast, removePodcast, myPodcasts } = usePodcasts()
+    const { addPodcast, removePodcast, myPodcasts, podcast, setPodcastId } = usePodcasts()
+
+    useEffect( () => {
+        setPodcastId(id)
+    }, [id])
 
     const inMyPodcasts = () => {
         return myPodcasts?.some(podcast => podcast.api_id === id)
