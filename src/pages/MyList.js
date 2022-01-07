@@ -4,7 +4,6 @@ import guy from "../img/guy2.png"
 import { useAuthState } from '../hooks/auth';
 import { useNavigate } from 'react-router';
 import { useLoadingState } from '../hooks/loading';
-import { useEffect } from 'react';
 import OnImagesLoaded from 'react-on-images-loaded';
 
 const MyList = () => {
