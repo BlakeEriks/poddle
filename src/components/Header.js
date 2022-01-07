@@ -38,9 +38,9 @@ const Header = () => {
                         <Link onClick={() => setLoading(true)} to="my-genres" className="p-2">
                             {auth.user.username}
                         </Link>
-                        <Link onClick={() => setLoading(true)} to="home" onClick={logout} className="bg-green p-2 br">
+                        <div onClick={() => {setLoading(true);logout();navigate('home')}} to="home" className="bg-green p-2 br">
                             Logout
-                        </Link>
+                        </div>
                     </div>
                 :
                     <div className="flex items-center">
