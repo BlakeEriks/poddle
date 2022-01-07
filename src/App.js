@@ -44,7 +44,7 @@ function App() {
           </Routes>
         </div>
       </CSSTransition>
-      <div className={"flex absolute justify-center border-gray-300 w-full transition-all duration-200 " + (loading ? "opacity-100" : "opacity-0")} style={{top: '30vh'}}>
+      <div className={"flex absolute justify-center border-gray-300 w-full " + (loading ? "block" : "hidden")} style={{top: '30vh'}}>
         <ClipLoader color="#A8A8A8" size={150} />
       </div>
       <Footer />
