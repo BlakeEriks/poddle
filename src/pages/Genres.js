@@ -2,7 +2,6 @@ import useGenres from '../hooks/genre';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
-import { useAuthState } from '../hooks/auth';
 import { useLoadingState } from '../hooks/loading';
 
 const Genres = () => {
@@ -10,7 +9,6 @@ const Genres = () => {
     const {allGenres, myGenres, updateGenres} = useGenres()
     const [userGenres, setUserGenres] = useState([])
     const navigate = useNavigate()
-    const [auth] = useAuthState()
     const {loading, setLoading} = useLoadingState()
 
     useEffect( () => {
@@ -18,7 +16,8 @@ const Genres = () => {
     }, [myGenres])
 
     useEffect( () => {
-        setTimeout( () => setLoading(false), 0)
+        setLoading(false)
+        // setTimeout( () => setLoading(false), 1000)
     }, [])
 
     const toggleGenre = genre => {
