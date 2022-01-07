@@ -2,16 +2,24 @@ import useGenres from '../hooks/genre';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
+import { useAuthState } from '../hooks/auth';
+import { useLoadingState } from '../hooks/loading';
 
 const Genres = () => {
 
     const {allGenres, myGenres, updateGenres} = useGenres()
     const [userGenres, setUserGenres] = useState([])
     const navigate = useNavigate()
+    const [auth] = useAuthState()
+    const {loading, setLoading} = useLoadingState()
 
     useEffect( () => {
         setUserGenres(myGenres)
     }, [myGenres])
+
+    useEffect( () => {
+        setTimeout( () => setLoading(false), 0)
+    }, [])
 
     const toggleGenre = genre => {
         if (userGenres.find(userGenre => userGenre.id === genre.id)) {
@@ -43,6 +51,7 @@ const Genres = () => {
         if (hasChanges()) {
             updateGenres({ids: userGenres.map(genre => genre.id)})
         }
+        setLoading(true)
         navigate('/recommended')
     }
 
@@ -65,9 +74,7 @@ const Genres = () => {
                 })}
             </div>
             <form onSubmit={onSave}>
-                <button 
-                    className={"my-4 px-10 py-3 text-2xl br border border-gray-300 " + ( hasChanges() ? 'bg-green' : '' )}
-                >
+                <button className={"my-4 px-10 py-3 text-2xl br border border-gray-300 " + ( hasChanges() ? 'bg-green' : '' )}>
                     Save
                 </button>
             </form>
