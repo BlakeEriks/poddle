@@ -26,6 +26,8 @@ function App() {
     window.scrollTo(0, 0);
   }, [location]);
 
+  console.log(loading)
+
   return (
     <>
       <Header />
