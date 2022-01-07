@@ -2,47 +2,52 @@ import { Link } from "react-router-dom"
 import { useAuthState } from '../hooks/auth';
 import logo from '../img/Poddle.png'
 import useUserActions from "../hooks/user";
+import { useLocation } from "react-router-dom"
+import { useLoadingState } from '../hooks/loading';
+import { useNavigate } from 'react-router';
 
 const Header = () => {
 
     const [auth] = useAuthState()
     const { logout } = useUserActions()
+    const { pathname } = useLocation()
+    const {loading, setLoading} = useLoadingState()
+    const navigate = useNavigate()
+
+    const links = [
+        {name: 'Home', path: '/home' },
+        {name: 'Top', path: '/top' },
+        {name: 'Recommended', path: '/recommended' },
+        {name: 'My List', path: '/my-list' }
+    ]
 
     return (
-        <div className="flex flex-row justify-between items-center px-6 font-script text-2xl border-b border-gray-300 w-full">
-            <Link to="home" className="w-32 cursor-pointer font-semibold" >
+        <div className="flex flex-row justify-between items-center px-6 font-script text-2xl border-b border-gray-300 w-full shadow-lg sticky top-0 bg-white z-10 box-border">
+            <Link onClick={() => setLoading(true)} to="home" className="w-32 cursor-pointer font-semibold" >
                 <img src={logo} />
             </Link>
             <div className="flex flex-row justify-center w-full">
-                <Link to="home" className="hover:bg-green p-5">
-                    Home
-                </Link>
-                <Link to="top" className="hover:bg-green p-5">
-                    Top
-                </Link>
-                <Link to="recommended" className="hover:bg-green p-5">
-                    Recommended
-                </Link>
-                <Link to="my-list" className="hover:bg-green p-5">
-                    My List
-                </Link>
+                {links.map( link => 
+                <Link onClick={() => setLoading(true)} key={link.path} to={link.path} className={"hover:bg-gray-100 p-5 box-border " + (pathname === link.path ? 'border-b-4 border-green' : '')}>
+                    {link.name}
+                </Link> )}
             </div>
             <div className="text-lg font-normal">
                 { auth ? 
                     <div className="flex flex-row">
-                        <Link to="my-genres" className="p-2">
+                        <Link onClick={() => setLoading(true)} to="my-genres" className="p-2">
                             {auth.user.username}
                         </Link>
-                        <Link to="home" onClick={logout} className="bg-green p-2 br">
+                        <Link onClick={() => setLoading(true)} to="home" onClick={logout} className="bg-green p-2 br">
                             Logout
                         </Link>
                     </div>
                 :
                     <div className="flex items-center">
-                        <Link to="login" className="p-2 whitespace-nowrap">
+                        <Link onClick={() => setLoading(true)} to="login" className="p-2 whitespace-nowrap">
                             Log In
                         </Link> {" "}
-                        <Link to="sign-up" className="bg-green p-2 br whitespace-nowrap">
+                        <Link onClick={() => setLoading(true)} to="sign-up" className="bg-green p-2 br whitespace-nowrap">
                             Sign Up
                         </Link>
                     </div>
