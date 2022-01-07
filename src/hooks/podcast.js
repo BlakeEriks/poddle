@@ -9,8 +9,8 @@ const usePodcasts = () => {
 
     const http = useHttp()
     const [auth] = useAuthState()
-    const queryClient = useQueryClient()
     const [podcastId, setPodcastId] = useState()
+    const [updatePodcastLoading, setUpdatePodcastLoading] = useState(false)
 
     const topPodcastsQuery = useQuery('podcasts/top', async () => await http.get(`${API_BASE_URL}/podcasts/top`))
 
@@ -27,19 +27,23 @@ const usePodcasts = () => {
             alert('Please log in to save podcasts.')
         }
         else {
+            setUpdatePodcastLoading(true)
             await http.post(`${API_BASE_URL}/podcasts/my_list`, {...podcast, api_id: podcast.id})
-            queryClient.invalidateQueries('podcasts/my-list')
+            await myPodcastsQuery.refetch()
+            setUpdatePodcastLoading(false)
         }
     }
 
     const removePodcast = async podcast => {
+        setUpdatePodcastLoading(true)
         await http.delete(`${API_BASE_URL}/podcasts/my_list/${podcast.id}`)
-        queryClient.invalidateQueries('podcasts/my-list')
+        await myPodcastsQuery.refetch()
+        setUpdatePodcastLoading(false)
     }
 
     const podcastsLoading = topPodcastsQuery.status === 'loading' || 
                     recommendedPodcastsQuery.status === 'loading' || 
-                    myPodcastsQuery.status === 'loading' || 
+                    myPodcastsQuery.status === 'loading' ||
                     podcastQuery.status === 'loading'
 
     return {
@@ -49,8 +53,9 @@ const usePodcasts = () => {
         recommendedPodcasts: recommendedPodcastsQuery?.data, 
         podcast: podcastQuery?.data,
         setPodcastId,
-        addPodcast, 
+        addPodcast,
         removePodcast,
+        updatePodcastLoading,
         podcastsLoading
     }
 }
