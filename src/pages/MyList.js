@@ -1,13 +1,23 @@
 import Podcasts from '../components/Podcasts';
-import {usePodcasts} from '../hooks/podcast';
+import usePodcasts from '../hooks/podcast';
 import guy from "../img/guy2.png"
+import { useAuthState } from '../hooks/auth';
+import { useNavigate } from 'react-router';
+import { useLoadingState } from '../hooks/loading';
+import { useEffect } from 'react';
+import OnImagesLoaded from 'react-on-images-loaded';
 
 const MyList = () => {
 
     const { myPodcasts } = usePodcasts()
+    const [auth] = useAuthState()
+    const navigate = useNavigate()
+    const {loading, setLoading} = useLoadingState()
 
     return (
-        <>
+        <OnImagesLoaded 
+            onLoaded={() => {setLoading(false)}}
+        >
             <div className="flex items-center justify-evenly p-24 border-b border-gray-300">
                 <img src={guy} alt="woman listening to podcast" style={{width: '25vw'}}/>
                 <div className="text-center p-8">
@@ -22,7 +32,7 @@ const MyList = () => {
             <div className="w-full flex flex-wrap flex-col items-center">
                 <Podcasts podcasts={myPodcasts}/>
             </div>
-        </>
+        </OnImagesLoaded>
     )
 }
 
