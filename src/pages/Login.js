@@ -1,12 +1,18 @@
-import {useState} from "react"
+import {useState, useEffect} from "react"
 import { useNavigate } from "react-router";
 import useUserActions from '../hooks/user';
+import { useLoadingState } from '../hooks/loading';
 
 const Login = ({ newUser }) => {
 
     const userActions = useUserActions()
     const [form, setForm] = useState({username: '', password: ''})
     const navigate = useNavigate();
+    const {loading, setLoading} = useLoadingState()
+
+    useEffect(() => {
+        setTimeout( () => setLoading(false), 0)
+    }, [])
 
     const handleSubmit = async event => {
         event.preventDefault()
@@ -17,7 +23,8 @@ const Login = ({ newUser }) => {
             else {
                 await userActions.login({...form})
             }
-            navigate('/explore')
+            setLoading(true)
+            navigate('/home')
         }
         catch (err) {
             alert('Invalid login or username taken')
@@ -39,7 +46,7 @@ const Login = ({ newUser }) => {
                     value={form.username} 
                     onChange={onChange} 
                     placeholder="username" 
-                    required 
+                    required
                 />
                 <input 
                     className="border p-5 br mb-5"
@@ -56,9 +63,6 @@ const Login = ({ newUser }) => {
                 >
                     {newUser ? 'Sign Up' : 'Log In'}
                 </button>
-                {/* <button onClick={() => setViewState('default')}>
-                    <TimesIcon />
-                </button> */}
             </form>
         </div>
     )
