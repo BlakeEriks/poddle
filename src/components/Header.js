@@ -35,9 +35,9 @@ const Header = () => {
             <div className="text-lg font-normal">
                 { auth ? 
                     <div className="flex flex-row">
-                        <Link onClick={() => setLoading(true)} to="my-genres" className="p-2">
+                        <div onClick={() => {setLoading(true);setTimeout(() => navigate('/my-genres'), 10)}} className="p-2">
                             {auth.user.username}
-                        </Link>
+                        </div>
                         <div onClick={() => {setLoading(true);logout();navigate('home')}} to="home" className="bg-green p-2 br">
                             Logout
                         </div>
