@@ -6,6 +6,7 @@ const useUserActions = () => {
     
     const http = useHttp()
     const [auth, setAuth] = useAuthState()
+    const queryClient = useQueryClient()
 
     const API_BASE_URL = process.env.REACT_APP_API_URL
     
