@@ -26,19 +26,17 @@ function App() {
     window.scrollTo(0, 0);
   }, [location]);
 
-  console.log(loading)
-
   return (
     <>
       <Header />
-      <CSSTransition key={location.key} in={false} timeout={0}>
+      <CSSTransition key={location.key} timeout={700}>
         <div className={"transition-all duration-700 relative " + (loading ? "opacity-0 top-5" : "opacity-100 top-0")}>
           <Routes>
               <Route index element={<Navigate to="/home" />} />
               <Route path="home" element={<Home />} />
+              <Route path="top" element={<Top />} />
               <Route path="login" element={<Login />} />
               <Route path="sign-up" element={<Login newUser={true}/>} />
-              <Route path="top" element={<Top />} />
               <Route path="recommended" element={<Recommended />} />
               <Route path="my-list" element={auth ? <MyList /> : <Navigate to="/login"/>} />
               <Route path="my-genres" element={auth ? <Genres /> : <Navigate to="/login"/>} />

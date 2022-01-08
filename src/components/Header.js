@@ -35,12 +35,12 @@ const Header = () => {
             <div className="text-lg font-normal">
                 { auth ? 
                     <div className="flex flex-row">
-                        <div onClick={() => {setLoading(true);setTimeout(() => navigate('/my-genres'), 10)}} className="p-2">
+                        <button onClick={() => {setLoading(true);setTimeout(() => navigate('/my-genres'), 10)}} className="p-2">
                             {auth.user.username}
-                        </div>
-                        <div onClick={() => {setLoading(true);logout();navigate('home')}} to="home" className="bg-green p-2 br">
+                        </button>
+                        <button onClick={() => {setLoading(true);logout();navigate('home')}} to="home" className="bg-green p-2 br">
                             Logout
-                        </div>
+                        </button>
                     </div>
                 :
                     <div className="flex items-center">
