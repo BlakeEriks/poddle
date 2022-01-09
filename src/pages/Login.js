@@ -8,7 +8,7 @@ const Login = ({ newUser }) => {
     const userActions = useUserActions()
     const [form, setForm] = useState({username: '', password: ''})
     const navigate = useNavigate();
-    const {loading, setLoading} = useLoadingState()
+    const {setLoading} = useLoadingState()
 
     useEffect(() => {
         setTimeout( () => setLoading(false), 0)
@@ -17,14 +17,15 @@ const Login = ({ newUser }) => {
     const handleSubmit = async event => {
         event.preventDefault()
         try {
+            setLoading(true)
             if (newUser) {
                 await userActions.register({...form})
+                navigate('/my-genres')
             }
             else {
                 await userActions.login({...form})
+                navigate('/home')
             }
-            setLoading(true)
-            navigate('/home')
         }
         catch (err) {
             alert('Invalid login or username taken')
