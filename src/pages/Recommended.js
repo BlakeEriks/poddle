@@ -7,7 +7,7 @@ import OnImagesLoaded from 'react-on-images-loaded';
 const Recommended = () => {
     
     const {recommendedPodcasts} = usePodcasts()
-    const {loading, setLoading} = useLoadingState()
+    const {setLoading} = useLoadingState()
 
     return (
         <OnImagesLoaded 

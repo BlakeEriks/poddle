@@ -1,17 +1,13 @@
 import Podcasts from '../components/Podcasts';
 import usePodcasts from '../hooks/podcast';
 import guy from "../img/guy2.png"
-import { useAuthState } from '../hooks/auth';
-import { useNavigate } from 'react-router';
 import { useLoadingState } from '../hooks/loading';
 import OnImagesLoaded from 'react-on-images-loaded';
 
 const MyList = () => {
 
     const { myPodcasts } = usePodcasts()
-    const [auth] = useAuthState()
-    const navigate = useNavigate()
-    const {loading, setLoading} = useLoadingState()
+    const {setLoading} = useLoadingState()
 
     return (
         <OnImagesLoaded 

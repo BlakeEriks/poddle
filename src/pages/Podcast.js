@@ -6,18 +6,12 @@ import { useEffect } from 'react';
 import OnImagesLoaded from 'react-on-images-loaded';
 import { useLoadingState } from '../hooks/loading';
 import ClipLoader from "react-spinners/ClipLoader";
-import { useQueryClient } from "react-query";
-import useHttp from '../hooks/http';
 
 const Podcast = () => {
 
     const { id } = useParams()
     const { addPodcast, updatePodcastLoading, removePodcast, myPodcasts, podcast, setPodcastId } = usePodcasts()
-    const { loading, setLoading } = useLoadingState()
-    const queryClient = useQueryClient()
-    const http = useHttp()
-
-    // console.log(loading)
+    const { setLoading } = useLoadingState()
 
     useEffect( () => {
         setPodcastId(id)

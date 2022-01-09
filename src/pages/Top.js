@@ -7,14 +7,7 @@ import { useLoadingState } from '../hooks/loading';
 const Top = () => {
 
     const { topPodcasts } = usePodcasts()
-    const {loading, setLoading} = useLoadingState()
-    // const [searchString, setSearchString] = useState('')
-
-    // const onSubmit = async event => {
-    //     event.preventDefault()
-    //     if (!searchString.length) return
-    //     setPodcasts(await getSearchPodcasts(searchString))
-    // }
+    const {setLoading} = useLoadingState()
 
     return (
         <OnImagesLoaded 
@@ -32,14 +25,6 @@ const Top = () => {
                 Top Podcasts
             </div>
             <div className="w-full flex flex-wrap flex-col items-center">
-                {/* <form onSubmit={onSubmit}>
-                    <input
-                        className="p-4 text-3xl br border border-black"
-                        placeholder="Search" 
-                        value={searchString}
-                        onChange={event => setSearchString(event.target.value)}
-                    />
-                </form> */}
                 <Podcasts podcasts={topPodcasts} />
             </div>
         </OnImagesLoaded>
