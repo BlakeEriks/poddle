@@ -9,7 +9,7 @@ const Genres = () => {
     const {allGenres, myGenres, updateGenres} = useGenres()
     const [userGenres, setUserGenres] = useState([])
     const navigate = useNavigate()
-    const {loading, setLoading} = useLoadingState()
+    const {setLoading} = useLoadingState()
 
     useEffect( () => {
         setUserGenres(myGenres)
@@ -17,7 +17,6 @@ const Genres = () => {
 
     useEffect( () => {
         setLoading(false)
-        // setTimeout( () => setLoading(false), 1000)
     }, [])
 
     const toggleGenre = genre => {

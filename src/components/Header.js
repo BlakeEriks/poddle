@@ -24,7 +24,7 @@ const Header = () => {
     return (
         <div className="flex flex-row justify-between items-center px-6 font-script text-2xl border-b border-gray-300 w-full shadow-lg sticky top-0 bg-white z-10 box-border">
             <Link onClick={() => setLoading(true)} to="home" className="w-32 cursor-pointer font-semibold" >
-                <img src={logo} />
+                <img src={logo} alt={logo}/>
             </Link>
             <div className="flex flex-row justify-center w-full">
                 {links.map( link => 

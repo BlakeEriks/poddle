@@ -4,7 +4,6 @@ import guy4 from '../img/guy4.png'
 import guy5 from '../img/guy5.png'
 import { useLoadingState } from '../hooks/loading';
 import OnImagesLoaded from 'react-on-images-loaded';
-import { useEffect } from 'react';
 
 const Home = () => {
 
@@ -13,7 +12,7 @@ const Home = () => {
         {quote: `"Poddle always has just what I'm looking for."`, name: "Sam", img: girl2},
         {quote: `"I love the awesome new podcasts I found with poddle!"`, name: "Josh", img: guy5}
     ]
-    const {loading, setLoading} = useLoadingState()
+    const {setLoading} = useLoadingState()
 
     return (
         <OnImagesLoaded

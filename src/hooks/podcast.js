@@ -1,4 +1,4 @@
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
 import useHttp from "./http";
 import { useAuthState } from './auth';
 import { useState } from 'react';

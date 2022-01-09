@@ -6,7 +6,7 @@ const Footer = () => {
             <div className="text-lg">
                 Created by <span className="font-semibold">Blake Eriks</span>
             </div>
-            <img src={listenNotes} className="w-40"/>
+            <img src={listenNotes} alt={listenNotes} className="w-40"/>
         </div>
     )
 }
