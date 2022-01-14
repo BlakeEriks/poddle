@@ -11,7 +11,7 @@ const Header = () => {
     const [auth] = useAuthState()
     const { logout } = useUserActions()
     const { pathname } = useLocation()
-    const {loading, setLoading} = useLoadingState()
+    const {setLoading} = useLoadingState()
     const navigate = useNavigate()
 
     const links = [
