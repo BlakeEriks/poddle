@@ -1,6 +1,7 @@
 <div align="center">
-  <img src="src/img/Poddle.png" alt="logo" width="500" style="background:white">
+  <img src="public/img/2022-01-13-17-16-09.png" alt="logo" width="500">
 </div>
+
 <h1>
   <p align="center">
     Created by Blake Eriks 
@@ -10,7 +11,7 @@
   </p>
 </h1>
 
-[Poddle🎧](https://bitsi.netlify.app/) is a podcast discovery platform that works in 3 easy steps:
+[Poddle🎧](https://poddle.netlify.app/) is a podcast discovery platform that works in 3 easy steps:
 
 >⬆️ Sign up.
 >
@@ -18,7 +19,7 @@
 >
 >🔎 Explore awesome podcasts.
 
-![explore](2022-01-13-17-05-55.png)
+![don't miss out](public/img/2022-01-13-17-17-32.png)
 
 ## 📡 Technologies
 
@@ -33,6 +34,8 @@
 * Ruby on Rails
 * Listen Notes API
 * Heroku Deployment
+
+![explore](public/img/2022-01-13-17-05-55.png)
 
 ## 🛠️ Installation Steps
 
